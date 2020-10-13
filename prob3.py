@@ -60,11 +60,8 @@ def main():
     
     # TAKING TOO LONG
     # projecteuler number:
-    num = 600851475143 
-    # report(num)
-    # print(f'largest prime factor of {num} is {solution(num)}')
-    
-    
+    # report(600851475143)
+        
     toc = time()
     
     print('time used:', toc - tic)
