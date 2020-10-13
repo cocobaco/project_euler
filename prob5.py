@@ -14,7 +14,7 @@ tic = time()
 
     
 def solution(n1, n2):
-    ans = n2 * (n2-1)
+    ans = n2 * (n2-1) / 2  # first guess
     while True:
         # print(ans)
         for n in range(n1, n2+1):
@@ -22,7 +22,7 @@ def solution(n1, n2):
                 ans += 1
                 break
             if n == n2:
-                return ans
+                return int(ans)
 
 
 def report(n1, n2):
