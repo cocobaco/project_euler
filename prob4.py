@@ -6,7 +6,7 @@ Created on Tue Oct 13 16:12:11 2020
 """
 
 # project euler: https://projecteuler.net
-# problem 4: largest palindrom product
+# problem 4: largest palindrome product
 
 from time import time
 
