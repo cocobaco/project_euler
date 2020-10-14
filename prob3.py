@@ -32,7 +32,8 @@ def solution(num):
     
     # range_to_check = list(reversed(range(2, int(num/2))))
     # using generator instead of list due to memory error
-    range_to_check = iter(reversed(range(2, int(num/2))))
+    # range_to_check = iter(reversed(range(2, int(num/2) + 1)))
+    range_to_check = iter(reversed(range(3, int(num ** 0.5) + 1, 2)))
     
     # print(range_to_check)
     # range_to_check.reverse()
@@ -57,11 +58,10 @@ def main():
     report(13195)
     report(1340257)
 
-    
-    # TAKING TOO LONG
     # projecteuler number:
-    # report(600851475143)
-        
+    report(600851475143)
+    # 6857
+    
     toc = time()
     
     print('time used:', toc - tic)

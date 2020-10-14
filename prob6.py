@@ -8,7 +8,9 @@ Created on Wed Oct 14 13:41:43 2020
 # problem 6: sum square difference
 
 from time import time
+import matplotlib.pyplot as plt
 
+plt.style.use('default')
 
 def solution(num):
     sum_of_sq = 0
@@ -39,6 +41,20 @@ def main():
     toc = time()
     
     print('time used:', toc - tic)
+    
+    # extra: plotting
+    nums = [10, 100, 1000, 10000, 100000]
+    diffs = []
+    for num in nums:
+        diffs.append(solution(num))
+        
+    plt.figure()
+    plt.plot(nums, diffs, '^-')
+    plt.xlabel('n')
+    plt.ylabel('sum square difference')
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.show()
     
     
 if __name__ == '__main__':
