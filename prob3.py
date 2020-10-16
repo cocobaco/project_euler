@@ -16,6 +16,8 @@ def is_prime(x):
         return False
     if x < 2:
         return False
+    if x == 2:
+        return True
     if x % 2 == 0:
         return False
     else:
