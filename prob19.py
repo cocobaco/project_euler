@@ -5,7 +5,6 @@ Created on Sun Oct 25 16:55:57 2020
 @author: Admin
 """
 
-# ONGOING
 
 # project euler: https://projecteuler.net
 # problem 19: Counting Sundays
