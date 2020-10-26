@@ -5,7 +5,6 @@ Created on Sun Oct 25 12:27:15 2020
 @author: Admin
 """
 
-# ONGOING
 # project euler: https://projecteuler.net
 # problem 18: Maximum path sum I
 
@@ -84,7 +83,8 @@ from time import time
 
 
 def arr_from_string(triang):
-    arr = triang.split('\n')
+    # arr = triang.strip('\n')
+    arr = triang.strip('\n').strip().split('\n')
     arr_split = [x.split() for x in arr]
     arr_int = [list(map(int, x)) for x in arr_split]   
     return arr_int
@@ -138,10 +138,11 @@ def arr_from_string(triang):
 #             print(x_series)
 
 
-def solution(triang):
+def solution(triang, verbose=True):
     # 1. build array out of multi-line string
     arr = arr_from_string(triang)
-    print(arr)
+    if verbose:
+        print(arr)
     nrows = len(arr)
     
     # 2. loop through each item on the bottom row
@@ -159,7 +160,8 @@ def solution(triang):
     all_series_tagged = []
     for i, x in enumerate(bottom_row):
         all_series_tagged.append([[x], i])
-    print(all_series_tagged)
+    if verbose:
+        print(all_series_tagged)
     
     # initial max sum
     # sums = [sum(series) for series in all_series]
@@ -168,7 +170,8 @@ def solution(triang):
     
     sums_tagged = [sum(series[0]) for series in all_series_tagged]
     max_sum = max(sums_tagged)
-    print('max sum:', max_sum)
+    if verbose:
+        print('max sum:', max_sum)
     
     prev_row_idx = nrows - 2
     
@@ -190,22 +193,27 @@ def solution(triang):
         #     for su in series_updated:
         #         all_series_updated.append(su)
         for series, i in all_series_tagged:
-            print(series, i)
+            if verbose:
+                print(series, i)
             adjacent_idxs = [idx for idx in [i-1, i] if (0 <= idx <= prev_row_idx)]
-            print('adjacent idxs:', adjacent_idxs)
+            if verbose:
+                print('adjacent idxs:', adjacent_idxs)
             series_updated_tagged = []
             for idx in adjacent_idxs:
                 series_updated_tagged.append([series + [prev_row[idx]], idx])
             for su in series_updated_tagged:
                 all_series_updated_tagged.append(su)
         # print('all series')
-        print('-' * 20)
+        
         # all_series = all_series_updated
         all_series_tagged = all_series_updated_tagged
-        # print('all series:', all_series)
-        print('all series_tagged:', all_series_tagged)
+        if verbose:
+            print('-' * 20)
+            # print('all series:', all_series)
+            print('all series_tagged:', all_series_tagged)
         prev_row_idx -= 1
     
+    print('total possible series:', len(all_series_tagged))
     sums_tagged = [sum(series[0]) for series in all_series_tagged]
     max_sum = max(sums_tagged)
     # print('max sum:', max_sum)
@@ -222,8 +230,10 @@ def solution(triang):
 
     return max_sum
 
-def report(triang):
-    print(f'max total of the triangle\n{triang}\nis {solution(triang)}')    
+
+def report(triang, verbose=False):
+    ans = solution(triang, verbose=verbose)
+    print(f'max total of the triangle\n{triang}\nis {ans}')    
 
     
 def main():
@@ -233,7 +243,7 @@ def main():
     7 4
     2 4 6'''
     
-    report(triang0)
+    report(triang0, verbose=True)
     
     
     triang1 = '''3
@@ -242,7 +252,7 @@ def main():
     8 5 9 3'''
     
 
-    report(triang1)
+    report(triang1, verbose=True)
     # 23
     
     # projecteuler number:
@@ -261,7 +271,7 @@ def main():
     91 71 52 38 17 14 91 43 58 50 27 29 48
     63 66 04 68 89 53 67 30 73 16 69 87 40 31
     04 62 98 27 23 09 70 98 73 93 38 53 60 04 23'''
-    report(triang2)
+    report(triang2, verbose=False)
     
     
     toc = time()
