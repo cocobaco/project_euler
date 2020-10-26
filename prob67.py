@@ -41,6 +41,7 @@ def solution(triang, verbose=True):
     while series_idxs != final_series_idxs:
         if verbose:
             print('current series_idxs', series_idxs)
+            print(series, '--> sum =', summ)
         new_series_idxs = series_idxs
         idx_to_change = n_rows - 1  # start checking at last index
         idx_to_check = idx_to_change - 1
@@ -54,24 +55,40 @@ def solution(triang, verbose=True):
                 idx_to_check = idx_to_change - 1
                 continue
         if verbose:
+            print('index to change:', idx_to_change)
             print('new_series_idxs:', new_series_idxs)
-        series = []
-        for s_idx, r_idx in zip(new_series_idxs, row_idxs):
-            series.append(arr[r_idx][s_idx])
-        summ = sum(series)
-        if verbose:
-            print(series, '--> sum =', summ)
-        max_sum = max([max_sum, summ])
-        # set up next series
-        # new_series_idxs = series_idxs   
         series_idxs = new_series_idxs
-    
+        
+#        for s_idx, r_idx in zip(new_series_idxs, row_idxs):
+#            series.append(arr[r_idx][s_idx])
+        # check whether the new value is larger than the old one
+        new_val = arr[idx_to_change][new_series_idxs[idx_to_change]]
+        old_val = arr[idx_to_change][new_series_idxs[idx_to_change-1]]
+        if verbose:
+            print('old val: {}, new val: {}'.format(old_val, new_val))
+        
+        series = []
+        for i, s_idx in enumerate(new_series_idxs):
+            series.append(arr[i][s_idx])
+            
+        if new_val <= old_val:
+            continue
+        else:
+            summ = sum(series)
+            if verbose:
+                print(series, '--> sum =', summ)
+                print('-' * 20)
+            max_sum = max([max_sum, summ])
+
     return max_sum
 
 
 def report(triang, verbose=False):
     ans = solution(triang, verbose=verbose)
-    print(f'max total of the triangle\n{triang}\nis {ans}')    
+    if verbose:
+        print(f'max total of the triangle\n{triang}\nis {ans}')    
+    else:
+        print(f'max total of the triangle is {ans}') 
 
 
 def main():
