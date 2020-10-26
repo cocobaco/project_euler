@@ -12,10 +12,11 @@ Created on Sun Oct 25 12:59:40 2020
 from time import time
 
 # doesn't work for big triangle. too memory intensive.
-from prob18 import report, arr_from_string
+# from prob18 import report, arr_from_string
+from prob18 import arr_from_string
 
     
-def solution(triang):
+def solution(triang, verbose=True):
     arr = arr_from_string(triang)
     
     # go from top. go down each possible series and only keep the max sum
@@ -29,34 +30,49 @@ def solution(triang):
     # final series
     final_series_idxs = [i for i in range(n_rows)]
     
-    max_sum = 0
+    # first sum
     series = []
-    while series != final_series_idxs:
-        new_series_idxs = series_idxs
+    for s_idx, r_idx in zip(series_idxs, row_idxs):
+        series.append(arr[r_idx][s_idx])
+    summ = sum(series)
         
-        for s_idx, r_idx in zip(series_idxs, row_idxs):
+    max_sum = summ
+
+    while series_idxs != final_series_idxs:
+        if verbose:
+            print('current series_idxs', series_idxs)
+        new_series_idxs = series_idxs
+        idx_to_change = n_rows - 1  # start checking at last index
+        idx_to_check = idx_to_change - 1
+        # check index to change, starting from the end
+        while True:
+            if new_series_idxs[idx_to_change] == new_series_idxs[idx_to_check]:
+                new_series_idxs[idx_to_change] += 1
+                break
+            else:
+                idx_to_change -= 1
+                idx_to_check = idx_to_change - 1
+                continue
+        if verbose:
+            print('new_series_idxs:', new_series_idxs)
+        series = []
+        for s_idx, r_idx in zip(new_series_idxs, row_idxs):
             series.append(arr[r_idx][s_idx])
         summ = sum(series)
-        print(summ)
+        if verbose:
+            print(series, '--> sum =', summ)
         max_sum = max([max_sum, summ])
+        # set up next series
+        # new_series_idxs = series_idxs   
         series_idxs = new_series_idxs
-        
     
-    max_sum = sum(first_series)
-    print('first sum:')
-    summ = arr[0][0]  # top of pyramid
-    print('top element:', summ)
-    for row_idx in range(1, n_rows):
-        current_row = arr[row_idx]
-        print('current row:', current_row)
-        # n_elems = row_idx + 1
-        idx_add = 0
-        summ += arr[row_idx][idx_add]
-        print(summ)
-    # print(summ)
-    max_sum = max([max_sum, summ])
-    print('max_sum:', max_sum)
-        
+    return max_sum
+
+
+def report(triang, verbose=False):
+    ans = solution(triang, verbose=verbose)
+    print(f'max total of the triangle\n{triang}\nis {ans}')    
+
 
 def main():
     tic = time()
@@ -73,12 +89,11 @@ def main():
     file = 'data/p067_triangle.txt'
     with open(file, 'r') as myfile:
         triang2 = myfile.read()
-
     
     # read first N lines
-    with open(file, 'r') as myfile:
-        triang2_list = [next(myfile) for x in range(20)]   
-    triang2 = ''.join(triang2_list)
+    # with open(file, 'r') as myfile:
+    #     triang2_list = [next(myfile) for x in range(50)]   
+    # triang2 = ''.join(triang2_list)
     
     report(triang2, verbose=False)
      
