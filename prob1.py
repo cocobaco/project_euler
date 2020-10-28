@@ -10,7 +10,7 @@ Created on Tue Oct 13 11:36:05 2020
 from time import time
 
 
-tic = time()
+
 
     
 def solution(num):
@@ -25,13 +25,20 @@ def report(num):
     print(f'sum of numbers below {num} that are multiples of 3 or 5 is {solution(num)}')
 
 
-report(10)
-
-
-# projecteuler number:
-report(1000)
-# 
-
-toc = time()
-
-print('time used:', toc - tic)
+def main():
+    tic = time()
+    
+    report(10)
+    # 23
+    
+    # projecteuler number:
+    report(1000)
+    # 233168
+    
+    toc = time()
+    
+    print('time used:', toc - tic)
+    
+    
+if __name__ == '__main__':
+    main()

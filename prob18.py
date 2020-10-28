@@ -84,7 +84,7 @@ from time import time
 
 def arr_from_string(triang):
     # arr = triang.strip('\n')
-    arr = triang.strip('\n').strip().split('\n')
+    arr = triang.strip().split('\n')
     arr_split = [x.split() for x in arr]
     arr_int = [list(map(int, x)) for x in arr_split]   
     return arr_int
@@ -212,8 +212,8 @@ def solution(triang, verbose=True):
             # print('all series:', all_series)
             print('all series_tagged:', all_series_tagged)
         prev_row_idx -= 1
-    
-    print('total possible series:', len(all_series_tagged))
+    if verbose:
+        print('total possible series:', len(all_series_tagged))
     sums_tagged = [sum(series[0]) for series in all_series_tagged]
     max_sum = max(sums_tagged)
     # print('max sum:', max_sum)
@@ -239,11 +239,11 @@ def report(triang, verbose=False):
 def main():
     tic = time()
     
-    triang0 = '''3
-    7 4
-    2 4 6'''
-    
-    report(triang0, verbose=True)
+#    triang0 = '''3
+#    7 4
+#    2 4 6'''
+#    
+#    report(triang0, verbose=True)
     
     
     triang1 = '''3
