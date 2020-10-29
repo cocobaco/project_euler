@@ -12,8 +12,6 @@ from time import time
 import matplotlib.pyplot as plt
 import math
 
-plt.style.use('default')
-
 
 def find_divisors(n):
     divisors = [1, n]
@@ -39,6 +37,8 @@ def report(n):
     
     
 def main():
+    plt.style.use('default')
+    
     tic = time()
     
     report(7)
