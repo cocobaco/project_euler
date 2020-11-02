@@ -9,9 +9,6 @@ Created on Sat Oct 31 19:11:36 2020
 
 from time import time
 
-
-# ONGOING
-
 def solution(n, ith, verbose=False):
     perms = []
     nums = list(range(n+1))
@@ -65,7 +62,7 @@ def main():
     
     # projecteuler number:
     report(9, 1000000, verbose=False)
-    
+    # 2783915460
     
     toc = time()
     print('time used:', toc - tic)
