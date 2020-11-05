@@ -20,6 +20,7 @@ def long_divide(num, div, verbose=True):
     ans_str = str(ans) + '.'
     
     remain = int(num % div)
+    remains = [remain]
     decimals = []
     
     # i = 1
@@ -33,6 +34,11 @@ def long_divide(num, div, verbose=True):
         if verbose:
             print('next_digit:', next_digit)
         remain = int(next_num % div)
+
+        decimals.append(next_digit)
+        if verbose:
+            print(decimals)
+        
         if verbose:
             print('remain:', remain)
 
@@ -45,19 +51,26 @@ def long_divide(num, div, verbose=True):
         if remain == 0:
             if verbose:
                 print('remain = 0')
-            break            
+            break
     
         # check for repeat        
         # if int(ans_str[-1]) in decimals:
-        if next_digit in decimals:
+        # if next_digit in decimals:
+        #     if verbose:
+        #         print('found repeat')
+        #     num_digits_recur = len(decimals) - decimals.index(next_digit)
+        #     break
+        
+        # check for repeated remain
+        if remain in remains:
             if verbose:
-                print('found repeat')
-            num_digits_recur = len(decimals) - decimals.index(next_digit)
+                print('found repeated remain')
+            # num_digits_recur = len(decimals) - decimals.index(next_digit)
+            num_digits_recur = len(remains) - remains.index(remain)
             break
         
-        decimals.append(next_digit)
-        if verbose:
-            print(decimals)
+        remains.append(remain)
+        
         
         # i += 1
     
@@ -66,6 +79,9 @@ def long_divide(num, div, verbose=True):
     
 def solution(num, n, verbose=True):
     max_recur = 0
+    d = 2
+    frac = num / d  # 1/2
+
     for div in range(2, n):
         ans = long_divide(num, div, verbose=verbose)
         if ans[1] > max_recur:
@@ -78,10 +94,11 @@ def solution(num, n, verbose=True):
 
 def report(num, n, verbose=True):
     frac, max_recur, d = solution(num, n, verbose=verbose)
-    print(f'd < {n} for which 1/d gives the longest recurring cycle in its decimal fraction part is {max_recur}')
-    print(f'd={d}, frac={frac}')    
+    print('-' * 20)
+    print(f'd < {n} for which 1/d gives the longest recurring cycle in its decimal fraction part is {d}')
+    print(f'max_recur={max_recur}, frac={frac}')
     
-
+    
 def main():
     tic = time()
     
@@ -90,7 +107,10 @@ def main():
     
     # projecteuler number:
     report(1, 1000, verbose=False)
-    # 233168
+    # d=983, recur=982
+    
+    # for d in range(2, 100):
+    #     print(d, long_divide(1, d, verbose=False))
     
     toc = time()
     
