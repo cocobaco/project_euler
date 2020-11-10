@@ -18,7 +18,8 @@ def solution(num):
 
 
 def report(num):
-    print(f'sum of numbers below {num} that are multiples of 3 or 5 is {solution(num)}')
+    print((f'sum of numbers below {num} that are multiples of 3 or 5 '
+           f'is {solution(num)}'))
 
 
 def main():
