@@ -60,7 +60,6 @@ def main():
     
     # projecteuler number:
     report()
-    # 233168
     
     toc = time()
     
