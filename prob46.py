@@ -61,7 +61,7 @@ def main():
     # projecteuler number:
     report()
     # 5777
-    
+
     toc = time()
     
     print('time used:', toc - tic)
