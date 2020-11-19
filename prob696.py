@@ -166,7 +166,6 @@ def get_n_trips(n, whs, all_tiles, kind='pung', verbose=True):
                 
             if verbose:
                 print(f'{kind} trips:', trips)
-            # for trip in trips_pung:
             for trip in trips:
                 new_wh = wh + trip
                 if verbose:

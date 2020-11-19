@@ -32,7 +32,6 @@ def solution(num, verbose=True):
         if val > num:
             continue
         if val == num:
-            # n1, n50p, n20p, n10p, n5p, n2p, n1p = 0, 0, 0, 0, 0, 0, 0
             combo = {'2': n2, '1': n1, '50p': n50p, '20p': n20p, 
                      '10p': n10p, '5p': n5p, '2p': n2p, '1p': n1p}
             combos.append(combo)
