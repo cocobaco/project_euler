@@ -20,6 +20,19 @@ from itertools import chain
 import pandas as pd
 
 
+def get_remain_tiles(wh, all_tiles):
+    remain_tiles = all_tiles.copy()
+    for tile in wh:
+        remain_tiles.remove(tile)
+    return remain_tiles
+
+
+def gen_remain_suits(tiles):
+    tiles_list = list(tiles)
+    suits = iter(set((tile[0] for tile in tiles_list)))
+    return suits
+            
+            
 def find_all_pungs(tiles):
     '''same suit and same number'''
     trips = []
@@ -34,7 +47,7 @@ def find_all_pungs(tiles):
 def find_all_pungs2(tiles):
     '''same suit and same number'''
 
-    counter = Counter(tiles)
+    counter = Counter(iter(tiles))
     
     count = 0
     trips = iter([])
@@ -53,19 +66,14 @@ def find_all_pungs2(tiles):
     return trips
 
 
-def gen_remain_suits(tiles):
-    suits = set((tile[0] for tile in tiles))
-    return iter(suits)
-            
-            
 def find_all_chows(tiles):
     '''same suit and 3 consecutive numbers'''
     trips = []
     
-    remaining_suits = gen_remain_suits(tiles)
+    remain_suits = gen_remain_suits(tiles)
     
     # go through each remaining suit
-    for s in remaining_suits:
+    for s in remain_suits:
         s_chows = []
         # tiles_s = [tile for tile in rem_tiles if tile[0]==s]
         tiles_s = [tile for tile in tiles if tile[0]==s]
@@ -92,10 +100,10 @@ def find_all_chows2(tiles):
     '''same suit and 3 consecutive numbers'''
     trips = iter([])
     
-    remaining_suits = gen_remain_suits(tiles)
+    remain_suits = gen_remain_suits(iter(tiles))
     
     # go through each remaining suit
-    for i, s in enumerate(remaining_suits):
+    for i, s in enumerate(remain_suits):
         s_chows = []
         # s_chows = iter([])
         # tiles_s = [tile for tile in rem_tiles if tile[0]==s]
@@ -108,6 +116,7 @@ def find_all_chows2(tiles):
             if all(x in nums for x in consecs):
                 chow = [(s,n), (s,n+1), (s,n+2)]
                 s_chows.append(chow)
+                # print(s_chows)
                 # s_chows = chain(s_chows, chow)
                 # if chow not in s_chows:
                 #     # print('new chow:', chow)
@@ -191,19 +200,6 @@ def remove_dupes_lol_counter2(lol):
     return unique
 
 
-def get_remain_tiles(wh, all_tiles):
-    remain_tiles = all_tiles.copy()
-            
-    # print('wh:', wh)
-    for tile in wh:
-        # print('current remaining tiles:', remain_tiles)
-        # print('removing', tile)
-        
-        remain_tiles.remove(tile)
-    
-    return iter(remain_tiles)
-
-
 def get_n_trips(n, whs, all_tiles, kind='pung', verbose=True):
     '''get possible triples (pung or chow)'''
     whs_updated = whs.copy()
@@ -249,6 +245,10 @@ def get_n_trips(n, whs, all_tiles, kind='pung', verbose=True):
 def get_n_trips2(n, whs, all_tiles, kind='pung', verbose=True):
     '''get possible triples (pung or chow)'''
     # print('check type whs:', type(whs), kind)
+    
+    if n == 0:
+        return whs
+    
     whs_updated = iter(whs)
     
     for ni in range(n):
@@ -358,7 +358,8 @@ def trip_loop2(n, s, t, verbose=True):
         # https://stackoverflow.com/a/42132767/5421647
         # pairs, whs_updated = tee(pairs)
         
-        whs_updated = find_pairs(n, s)
+        # whs_updated = iter(find_pairs(n, s))
+        whs_updated = find_pairs2(n, s)
         
         if verbose:
             print('*' * 20)
@@ -484,22 +485,22 @@ def solution2(n, s, t, verbose=True):
 
 def report(n, s, t, verbose=True):
     print((f'number of distinct winning hands for n={n}, s={s}, t={t} '
-            f'is {solution(n, s, t, verbose)} (mod 1000000007)'))
-            # f'is {solution2(n, s, t, verbose)} (mod 1000000007)'))
+            # f'is {solution(n, s, t, verbose)} (mod 1000000007)'))
+            f'is {solution2(n, s, t, verbose)} (mod 1000000007)'))
 
 
 def main():
     tic = time()
     
-    report(2, 1, 1, verbose=True)  # minimum possible deck
+    report(2, 1, 1, verbose=False)  # minimum possible deck
     # report(2, 1, 1, verbose=False)  # minimum possible deck
     # 2
     
-    report(4, 1, 1, verbose=False)
-    # 20
-    
     report(3, 1, 2, verbose=False)
     # 12
+    
+    report(4, 1, 1, verbose=True)
+    # 20
     
     report(7, 2, 2, verbose=False)
     # 3666
@@ -508,7 +509,7 @@ def main():
     # 13259
     
     report(10, 1, 4, verbose=False)
-    # 
+    # 26139
     
     # projecteuler number:
     # report(10**8, 10**8, 30, verbose=False)
