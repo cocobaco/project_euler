@@ -124,9 +124,7 @@ df = pd.DataFrame({'n': [4, 4, 4, 4, 4, 4, 4,
                            170, 1426, 7424, 26139, 64152]
                    })
 
-    
-df2 =
-
+   
 # ML regression
 
 from sklearn.linear_model import LinearRegression
