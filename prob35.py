@@ -18,7 +18,8 @@ def num_to_digitlist(n):
 
 
 def digitlist_to_num(mylist):
-    num = int(''.join(str(n) for n in mylist))
+    num_str = ''.join(str(n) for n in mylist)
+    num = int(num_str)
     return num
 
 
