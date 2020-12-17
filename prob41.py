@@ -27,10 +27,9 @@ def check_one_to_n(num):
         return False
 
 
-def permute_n_digits(n):
-    permutes = permutations(range(1, n+1), n)
+def permute_n_digits(n, nfirst=1):
+    permutes = permutations(range(nfirst, n+1), n-nfirst+1)
     return list(permutes)    
-
 
 
 def solution():
