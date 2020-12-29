@@ -4,6 +4,7 @@ Created on Tue Oct 13 11:36:05 2020
 
 @author: Admin
 """
+
 # project euler: https://projecteuler.net
 # problem 1: multiples of 3 and 5
 
