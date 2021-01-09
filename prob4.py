@@ -11,6 +11,15 @@ Created on Tue Oct 13 16:12:11 2020
 from time import time
 
 
+def is_palindrom(n):
+    '''check whether n is palindrome'''
+    n_rev = reverse_num(n)
+    if n_rev == n:
+        return True
+    else:
+        return False
+    
+
 def reverse_num(num):
     num_str = str(num)
     num_str_rev = num_str[-1::-1]
@@ -28,7 +37,8 @@ def solution(n):
     for num1 in range_check:
         for num2 in range_check:
             prod = num1 * num2
-            if reverse_num(prod) == prod:  # palindrome check
+            # if reverse_num(prod) == prod:  # palindrome check
+            if is_palindrom(prod):  # palindrome check
                 if prod > max_prod:
                     max_prod = prod  # update max_prod
                     num1_max = num1
