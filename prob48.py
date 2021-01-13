@@ -9,7 +9,7 @@ Created on Mon Oct 26 14:36:32 2020
 # problem 48: Self powers
 
 from time import time
-from math import factorial
+#from math import factorial
 
 tic = time()
 
