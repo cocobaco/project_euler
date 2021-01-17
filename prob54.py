@@ -5,8 +5,6 @@ Created on Mon Jan 11 18:06:49 2021
 @author: rop
 """
 
-# INCORRECT ANSWER
-
 # project euler: https://projecteuler.net
 # problem 54: poker hands
 
