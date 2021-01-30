@@ -5,7 +5,7 @@
 
 from time import time
 
-from prob44 import calc_n_pent, is_pentagon
+from prob44 import is_pentagon
 
 
 def calc_n_triang(n):

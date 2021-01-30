@@ -8,8 +8,10 @@ Created on Tue Oct 13 11:36:05 2020
 # project euler: https://projecteuler.net
 # problem 1: multiples of 3 and 5
 
+
 from time import time
     
+
 def solution(num):
     summ = 0
     for x in range(3, num):
