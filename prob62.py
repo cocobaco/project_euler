@@ -28,9 +28,9 @@ def num_from_lst(lst):
     return n
 
     
-def permutes(n):
-    '''get set of permutations of number n'''
-    digits = list(map(int, list(str(n))))
+def permutes(x):
+    '''get set of permutations of number x'''
+    digits = list(map(int, list(str(x))))
     permutes1 = permutations(digits, len(digits))
     permutes2 = set([])
     for p in permutes1:
