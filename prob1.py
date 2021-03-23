@@ -10,7 +10,7 @@ Created on Tue Oct 13 11:36:05 2020
 
 
 from time import time
-    
+
 
 def solution(num):
     summ = 0
@@ -27,18 +27,18 @@ def report(num):
 
 def main():
     tic = time()
-    
+
     report(10)
     # 23
-    
+
     # projecteuler number:
     report(1000)
     # 233168
-    
+
     toc = time()
-    
+
     print('time used:', toc - tic)
-    
-    
+
+
 if __name__ == '__main__':
     main()

@@ -68,10 +68,13 @@ def solution2(num):
     i = 1
     cubes = []
     while True:
-        digits = sorted(list(str(i**3)))
+        x = i ** 3
+        digits = sorted(list(str(x)))
+        print(i, digits)
         cubes.append(digits)
         if cubes.count(digits) == num:
-            lowest_cube = cubes.index(digits) ** 3
+            lowest_i = cubes.index(digits) + 1
+            lowest_cube = lowest_i ** 3
             return lowest_cube
         i += 1
         
@@ -91,6 +94,7 @@ def main():
     # projecteuler number:
     report(5)
     # 1006012008  # incorrect
+    # 126960157576  # solution2
     
     toc = time()
     
